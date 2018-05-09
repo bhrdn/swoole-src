@@ -83,7 +83,7 @@ function main()
 
     go(function () {
         u::sleep(0.5);
-        system("cowsay test");
+        system("cowsay test"); // you must install "cowsay" first
     });
 
     while ($current = $chan->pop()) {
