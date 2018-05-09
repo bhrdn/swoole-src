@@ -74,12 +74,25 @@ Short API Name
 -----
 #### start a new coroutine
 ```php
-go(function () {
-    co::sleep(0.5);
-    echo "hello";
-});
-go("test");
-go([$object, "method"]);
+use \Swoole\Coroutine as u;
+
+function main()
+{
+    $chan = new \Swoole\Channel(128);
+    foreach (range(1, 10) as $u) $chan->push($u);
+
+    go(function () {
+        u::sleep(0.5);
+        system("cowsay test");
+    });
+
+    while ($current = $chan->pop()) {
+        go(function () use ($current) {
+            (($current % 2 == 0) ?: u::sleep($current));
+            printf(">> %s" . PHP_EOL, $current);
+        });
+    }
+}main();
 ```
 
 #### Channel
