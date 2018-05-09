@@ -70,10 +70,8 @@ $server->on('Request', function($request, $response) {
 $server->start();
 ```
 
-Short API Name
------
-#### start a new coroutine
 ```php
+<?php
 use \Swoole\Coroutine as u;
 
 function main()
@@ -93,6 +91,18 @@ function main()
         });
     }
 }main();
+```
+
+Short API Name
+-----
+#### start a new coroutine
+```php
+go(function () {
+    co::sleep(0.5);
+    echo "hello";
+});
+go("test");
+go([$object, "method"]);
 ```
 
 #### Channel
